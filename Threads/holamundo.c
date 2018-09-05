@@ -12,6 +12,7 @@
 void * tfunc(void * args);
 
 int cont = 0;
+int contparc[NTHREADS];
 
 pthread_mutex_t l;
 
@@ -21,6 +22,10 @@ int main(){
 	int i = 0;
 	
 	pthread_mutex_init(&l, NULL);
+	
+	for(i = 0; i < NTHREADS; i++){
+		contparc[i] = 0;
+	}
 	
 	//id of the thread, parameters of the thread, function, params of the func
 	//				with parameters NULL = default
@@ -35,6 +40,10 @@ int main(){
 		pthread_join(tid[i], NULL); 
 	}
 	pthread_mutex_destroy(&l);
+	
+	for(i = 0; i < NTHREADS; i++){
+		cont+=contparc[i];
+	}
 	
 	printf("cont = %d\n", cont);
 }
@@ -51,9 +60,7 @@ void * tfunc(void *args){
 	printf("Hola mundo, soy %d\n", tnum);
 	
 	for(i = 0; i < 1000000000; i++){
-		lcont++;
-	}
-	cont+=lcont;
+		contparc[tnum]++
 }
 		
 		
