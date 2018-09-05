@@ -11,12 +11,16 @@
 //there is no other way to declare tfunc
 void * tfunc(void * args);
 
-int terminado = 0;
+int cont = 0;
+
+pthread_mutex_t l;
 
 int main(){
 	pthread_t tid[NTHREADS]; //store the id of the thread
 	int args[NTHREADS];
 	int i = 0;
+	
+	pthread_mutex_init(&l, NULL);
 	
 	//id of the thread, parameters of the thread, function, params of the func
 	//				with parameters NULL = default
@@ -30,6 +34,9 @@ int main(){
 	for(i = 0; i < NTHREADS; i++){
 		pthread_join(tid[i], NULL); 
 	}
+	pthread_mutex_destroy(&l);
+	
+	printf("cont = %d\n", cont);
 }
 
 void * tfunc(void *args){
@@ -39,8 +46,14 @@ void * tfunc(void *args){
 	
 	int tnum = *((int *) args);
 	
-	sleep(2);
+	int i, lcont = 0;
+
 	printf("Hola mundo, soy %d\n", tnum);
-	sleep(2);
-	terminado = 1;
+	
+	for(i = 0; i < 1000000000; i++){
+		lcont++;
+	}
+	cont+=lcont;
 }
+		
+		
