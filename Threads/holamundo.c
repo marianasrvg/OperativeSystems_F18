@@ -13,15 +13,17 @@ void * tfunc(void * args);
 
 int terminado = 0;
 
-
 int main(){
 	pthread_t tid[NTHREADS]; //store the id of the thread
+	int args[NTHREADS];
 	int i = 0;
 	
 	//id of the thread, parameters of the thread, function, params of the func
 	//				with parameters NULL = default
 	for(i = 0; i < NTHREADS; i++){
-		pthread_create(&tid[i], NULL, tfunc, (void *) &i); 
+		args[i] = i;
+		pthread_create(&tid[i], NULL, tfunc, (void *) &args[i]);
+		//usleep(1000);
 	}
 	
 	//if the principal or parent thread finish it would stop all the created threads
