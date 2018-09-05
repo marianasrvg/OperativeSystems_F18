@@ -8,6 +8,7 @@
 
 #define NTHREADS 4
 
+//there is no other way to declare tfunc
 void * tfunc(void * args);
 
 int terminado = 0;
@@ -20,7 +21,7 @@ int main(){
 	//id of the thread, parameters of the thread, function, params of the func
 	//				with parameters NULL = default
 	for(i = 0; i < NTHREADS; i++){
-		pthread_create(&tid[i], NULL, tfunc, NULL); 
+		pthread_create(&tid[i], NULL, tfunc, (void *) &i); 
 	}
 	
 	//if the principal or parent thread finish it would stop all the created threads
@@ -30,8 +31,14 @@ int main(){
 }
 
 void * tfunc(void *args){
-	sleep(5);
-	printf("Hola mundo\n");
-	sleep(5);
+	//args is a pointer to a void
+	//you have to cast it to a integer pointer
+	//with the * you get the value
+	
+	int tnum = *((int *) args);
+	
+	sleep(2);
+	printf("Hola mundo, soy %d\n", tnum);
+	sleep(2);
 	terminado = 1;
 }
