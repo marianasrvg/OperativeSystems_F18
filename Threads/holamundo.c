@@ -6,20 +6,27 @@
 //To compile
 //	gcc -o holamundo holamundo.c -lpthread
 
+#define NTHREADS 4
+
 void * tfunc(void * args);
 
 int terminado = 0;
 
 
 int main(){
-	pthread_t tid; //store the id of the thread
+	pthread_t tid[NTHREADS]; //store the id of the thread
+	int i = 0;
 	
 	//id of the thread, parameters of the thread, function, params of the func
 	//				with parameters NULL = default
-	pthread_create(&tid, NULL, tfunc, NULL); 
-	//if the principal or parent thread finish it would stop all the created threads
-	pthread_join(tid,NULL);
+	for(i = 0; i < NTHREADS; i++){
+		pthread_create(&tid[i], NULL, tfunc, NULL); 
+	}
 	
+	//if the principal or parent thread finish it would stop all the created threads
+	for(i = 0; i < NTHREADS; i++){
+		pthread_join(tid[i], NULL); 
+	}
 }
 
 void * tfunc(void *args){
