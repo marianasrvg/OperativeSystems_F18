@@ -18,7 +18,7 @@ int main(){
 	//				with parameters NULL = default
 	pthread_create(&tid, NULL, tfunc, NULL); 
 	//if the principal or parent thread finish it would stop all the created threads
-	while(!terminado); //wait CPU time
+	pthread_join(tid,NULL);
 	
 }
 
