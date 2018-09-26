@@ -4,11 +4,15 @@
 #include<pthread.h>
 
 #define NUMTHREADS 2
+#define TRUE 1
+#define FALSE 0
 
 void * tfunc(void * args);
 void tomando_cerveza(int n);
 void usando_el_wc(int n);
 
+
+int flag[2] = {FALSE, FALSE};
 int turno = 0;
 
 int main(){
@@ -37,9 +41,15 @@ void * tfunc(void * args){
 	
 	for(n = 0; n < 10; n++){
 		tomando_cerveza(i);
-		while(turno!=i);	//mientras no sea mi turno
+		//Seccion de entrada
+		while(flag[j]);	//Si el proceso j tiene la bandera encendida, me espero
+		sleep(1);
+		flag[i] = TRUE;
+		
 		usando_el_wc(i);
-		turno = j; 			//ceder el turno al turno
+		
+		//Seccion de salida
+		flag[i] = FALSE;		//ceder el turno al turno
 	}
 }
 
