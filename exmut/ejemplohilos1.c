@@ -42,9 +42,11 @@ void * tfunc(void * args){
 	for(n = 0; n < 10; n++){
 		tomando_cerveza(i);
 		//Seccion de entrada
-		while(flag[j]);	//Si el proceso j tiene la bandera encendida, me espero
-		sleep(1);
 		flag[i] = TRUE;
+		sleep(1);
+		while(flag[j]);	//Si el proceso j tiene la bandera encendida, me espero
+		
+		
 		
 		usando_el_wc(i);
 		
