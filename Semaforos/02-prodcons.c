@@ -48,8 +48,6 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-
-
     printf("Esperando que los hilos terminen...\n");
     for(n=0;n<=1;n++)
     {
