@@ -46,7 +46,7 @@ void * tfunc(void * args){
 		//sleep(1);
 		while(flag[j]){	//Si el proceso j tiene la bandera encendida, me espero
 			flag[i] = FALSE;
-			sleep(1);
+			usleep(rand()%3000000);
 			flag[j] = TRUE;
 		}
 		
