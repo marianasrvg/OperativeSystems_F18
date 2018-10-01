@@ -6,7 +6,7 @@
 
 #define TAMBUFFER 5
 
-#define VELPROD 6
+#define VELPROD 2
 #define VELCONS 6
 
 void *productor(void *arg);
