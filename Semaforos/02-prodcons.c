@@ -4,10 +4,10 @@
 #include <pthread.h> 
 #include "semaphores.h"
 
-#define TAMBUFFER 5
+#define TAMBUFFER 12
 
-#define VELPROD 2
-#define VELCONS 6
+#define VELPROD 1
+#define VELCONS 3
 
 void *productor(void *arg);
 void *consumidor(void *arg);
