@@ -6,8 +6,8 @@
 
 #define TAMBUFFER 12
 
-#define VELPROD 1
-#define VELCONS 3
+#define VELPROD 3
+#define VELCONS 1
 
 void *productor(void *arg);
 void *consumidor(void *arg);
